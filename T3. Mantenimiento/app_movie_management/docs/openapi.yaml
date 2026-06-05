@@ -1,0 +1,83 @@
+openapi: 3.0.3
+info:
+  title: Gestion de Peliculas
+  version: 1.0.0
+  description: API REST para gestionar el catalogo de peliculas con seguridad por cabecera X-FIS-EPN-KEY.
+servers:
+  - url: http://localhost:8080
+paths:
+  /peliculas:
+    get:
+      summary: Obtiene todas las peliculas
+      security:
+        - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Lista de peliculas
+    post:
+      summary: Crea una pelicula
+      security:
+        - ApiKeyAuth: []
+      requestBody:
+        required: true
+      responses:
+        '201':
+          description: Pelicula creada
+        '400':
+          description: Datos invalidos
+  /peliculas/{id}:
+    get:
+      summary: Obtiene una pelicula por id
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Pelicula encontrada
+        '404':
+          description: Pelicula no encontrada
+    put:
+      summary: Actualiza una pelicula
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+      responses:
+        '200':
+          description: Pelicula actualizada
+        '400':
+          description: Datos invalidos
+        '404':
+          description: Pelicula no encontrada
+    delete:
+      summary: Elimina una pelicula
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Pelicula eliminada
+        '404':
+          description: Pelicula no encontrada
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-FIS-EPN-KEY

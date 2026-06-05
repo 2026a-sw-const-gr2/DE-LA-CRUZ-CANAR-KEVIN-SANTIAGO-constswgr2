@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestion de Peliculas</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-copy-block">
+          <p class="eyebrow">Biblioteca personal</p>
+          <h1>Gestiona tu coleccion de peliculas</h1>
+          <p class="hero-copy">
+            Organiza tus peliculas favoritas con una interfaz clara, elegante y pensada para disfrutar tu catalogo.
+          </p>
+        </div>
+      </header>
+
+      <main class="layout">
+        <section class="panel form-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="section-kicker">Formulario</p>
+              <h2 id="formTitle">Agregar pelicula</h2>
+            </div>
+            <button type="button" class="ghost-button" id="resetButton">Limpiar</button>
+          </div>
+
+          <div class="api-key-note">
+            <label>
+              <span>Clave API</span>
+              <input
+                type="password"
+                id="apiKey"
+                placeholder="FIS-EPN-2026"
+                autocomplete="off"
+              />
+            </label>
+            <small>Esta clave se envia en la cabecera X-FIS-EPN-KEY para todas las peticiones.</small>
+          </div>
+
+          <form id="movieForm" class="movie-form">
+            <input type="hidden" id="movieId" />
+
+            <label>
+              <span>Titulo</span>
+              <input type="text" id="titulo" placeholder="Inception" required />
+            </label>
+
+            <label>
+              <span>Director</span>
+              <input type="text" id="director" placeholder="Christopher Nolan" required />
+            </label>
+
+            <label>
+              <span>Genero</span>
+              <select id="genero" required>
+                <option value="" selected disabled>Selecciona un genero</option>
+                <option value="Accion">Accion</option>
+                <option value="Aventura">Aventura</option>
+                <option value="Ciencia ficcion">Ciencia ficcion</option>
+                <option value="Drama">Drama</option>
+                <option value="Comedia">Comedia</option>
+                <option value="Terror">Terror</option>
+                <option value="Romance">Romance</option>
+                <option value="Animacion">Animacion</option>
+                <option value="Suspenso">Suspenso</option>
+                <option value="Fantasia">Fantasia</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Fecha de estreno</span>
+              <input type="date" id="anio" required />
+            </label>
+
+            <button type="submit" class="primary-button">Guardar pelicula</button>
+          </form>
+        </section>
+
+        <section class="panel list-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="section-kicker">Catalogo</p>
+              <h2>Peliculas registradas</h2>
+            </div>
+            <button type="button" class="ghost-button" id="reloadButton">Recargar</button>
+          </div>
+
+          <div class="list-toolbar">
+            <label class="search-field" for="searchInput">
+              <span>Buscar pelicula</span>
+              <input
+                type="search"
+                id="searchInput"
+                placeholder="Titulo, director o genero"
+                autocomplete="off"
+              />
+            </label>
+
+            <div class="results-chip" id="resultsSummary">0 resultados</div>
+          </div>
+
+          <div id="message" class="message" aria-live="polite"></div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Titulo</th>
+                  <th>Director</th>
+                  <th>Genero</th>
+                  <th>Fecha</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="moviesTableBody"></tbody>
+            </table>
+          </div>
+
+          <div id="emptyState" class="empty-state hidden">
+            <h3>No hay peliculas registradas</h3>
+            <p>Agrega la primera pelicula usando el formulario o cambia el filtro de busqueda.</p>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="/js/app.js"></script>
+  </body>
+</html>
